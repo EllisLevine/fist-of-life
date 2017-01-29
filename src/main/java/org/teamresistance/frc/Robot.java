@@ -5,6 +5,7 @@ import org.strongback.SwitchReactor;
 import org.strongback.command.Command;
 import org.strongback.components.ui.FlightStick;
 import org.strongback.hardware.Hardware;
+import org.teamresistance.frc.command.DriveToYX;
 import org.teamresistance.frc.command.HoldAngleCommand;
 import org.teamresistance.frc.subsystem.drive.Drive;
 
@@ -41,6 +42,8 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     Strongback.start();
+    // make sure these measurements are right
+    Strongback.submit(new DriveToYX(drive,2,78,1,0));
   }
 
   @Override
