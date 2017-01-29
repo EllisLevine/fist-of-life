@@ -24,12 +24,12 @@ import org.teamresistance.frc.subsystem.Looping;
 @Experimental
 public final class Pose {
   public final double currentAngle;
-  public final double xDist;
-  public final double yDist;
+  public final double xDistPing;
+  public final double yDistPing;
 
-  Pose(double currentAngle, double xDist, double yDist) {
+  Pose(double currentAngle, double xDistPing, double yDistPing) {
     this.currentAngle = currentAngle;
-    this.xDist = xDist;
-    this.yDist = yDist;
+    this.xDistPing = xDistPing;
+    this.yDistPing = yDistPing;
   }
 }
