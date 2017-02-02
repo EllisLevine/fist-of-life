@@ -1,8 +1,10 @@
 package org.teamresistance.frc;
 
+import edu.wpi.first.wpilibj.Ultrasonic;
 import org.strongback.Strongback;
 import org.strongback.SwitchReactor;
 import org.strongback.command.Command;
+import org.strongback.components.DistanceSensor;
 import org.strongback.components.ui.FlightStick;
 import org.strongback.hardware.Hardware;
 import org.teamresistance.frc.command.DriveToYX;
@@ -32,18 +34,20 @@ public class Robot extends IterativeRobot {
   @Override
   public void robotInit() {
     Strongback.configure().recordNoEvents().recordNoData().initialize();
+    IO.xDistPing.setAutomaticMode(true);
+    IO.yDistPing.setAutomaticMode(true);
     final SwitchReactor reactor = Strongback.switchReactor();
 
     // Hold the current angle of the robot while the trigger is held
-    reactor.onTriggeredSubmit(leftJoystick.getTrigger(), () -> new HoldAngleCommand(drive, 90));
-    reactor.onUntriggeredSubmit(leftJoystick.getTrigger(), () -> Command.cancel(drive));
+//    reactor.onTriggeredSubmit(leftJoystick.getTrigger(), () -> new HoldAngleCommand(drive, 90));
+//    reactor.onUntriggeredSubmit(leftJoystick.getTrigger(), () -> Command.cancel(drive));
+    reactor.onTriggeredSubmit(leftJoystick.getButton(6), () -> new DriveToYX(drive,10,66,10,0));
   }
 
   @Override
   public void autonomousInit() {
     Strongback.start();
     // make sure these measurements are right
-    Strongback.submit(new DriveToYX(drive,2,66,1,0));
   }
 
   @Override
@@ -54,8 +58,10 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopPeriodic() {
     Pose pose = new Pose(IO.gyro.getAngle(),
-        IO.xDistSensor.getDistance(),
-        IO.yDistSensor.getDistance());
+        IO.xDistPing.getRangeInches(),
+//        IO.xDistPing.getDistanceInInches(),
+        IO.yDistPing.getRangeInches());
+//        IO.yDistPing.getDistanceInInches());
     drive.onUpdate(pose);
   }
 
