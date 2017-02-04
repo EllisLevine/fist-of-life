@@ -1,5 +1,6 @@
 package org.teamresistance.frc.command;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.strongback.command.Command;
 import org.strongback.command.Requirable;
 import org.teamresistance.frc.subsystem.drive.Drive;
@@ -30,6 +31,7 @@ public class HoldAngleCommand extends Command {
 
   @Override
   public boolean execute() {
+    SmartDashboard.putBoolean("Angle Hold On Target?: ", controller.isOnTarget());
     return false; // Unlike a TurnToAngle command, we want HoldAngle to run indefinitely.
   }
 

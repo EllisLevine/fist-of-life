@@ -8,6 +8,8 @@ import org.strongback.command.Command;
 import org.strongback.components.DistanceSensor;
 import org.strongback.components.ui.FlightStick;
 import org.strongback.hardware.Hardware;
+import org.teamresistance.frc.command.DriveToX;
+import org.teamresistance.frc.command.DriveToY;
 import org.teamresistance.frc.command.DriveToYX;
 import org.teamresistance.frc.command.HoldAngleCommand;
 import org.teamresistance.frc.subsystem.drive.Drive;
@@ -34,7 +36,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotInit() {
-    Strongback.configure().recordNoEvents().recordNoData().initialize();
+    Strongback.configure().recordNoEvents().recordNoData();
     IO.xDistPing.setAutomaticMode(true);
     IO.yDistPing.setAutomaticMode(true);
     final SwitchReactor reactor = Strongback.switchReactor();
@@ -42,7 +44,10 @@ public class Robot extends IterativeRobot {
     // Hold the current angle of the robot while the trigger is held
 //    reactor.onTriggeredSubmit(leftJoystick.getTrigger(), () -> new HoldAngleCommand(drive, 90));
 //    reactor.onUntriggeredSubmit(leftJoystick.getTrigger(), () -> Command.cancel(drive));
-    reactor.onTriggeredSubmit(leftJoystick.getButton(6), () -> new DriveToYX(drive,10,66,10,0));
+
+    reactor.onTriggeredSubmit(leftJoystick.getButton(6), () -> new DriveToYX(drive,60,66,60,0));
+    reactor.onTriggeredSubmit(leftJoystick.getButton(7), () -> new DriveToY(drive, 10, 66));
+    reactor.onTriggeredSubmit(leftJoystick.getButton(8), () -> new DriveToX(drive, 10, 0));
   }
 
   @Override
@@ -65,6 +70,7 @@ public class Robot extends IterativeRobot {
 //        IO.yDistPing.getDistanceInInches());
     SmartDashboard.putNumber("Y Distance (Ping): ", pose.yDist);
     SmartDashboard.putNumber("X Distance (Ping): ", pose.xDist);
+    SmartDashboard.putNumber("Gyro Angle: ", pose.currentAngle);
     drive.onUpdate(pose);
   }
 
