@@ -72,6 +72,11 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("X Distance (Ping): ", pose.xDist);
     SmartDashboard.putNumber("Gyro Angle: ", pose.currentAngle);
     drive.onUpdate(pose);
+
+    IO.ORANGE_SPINNER.setSpeed(1);
+    IO.GREEN_SPINNER.setSpeed(1);
+
+
   }
 
   @Override
