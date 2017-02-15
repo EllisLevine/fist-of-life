@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 
 /**
  * @author Shreya Ravi
+ * @author Ellis Levine
  */
 public class IO {
   public static final Motor frontLeftMotor = Hardware.Motors.victor(0);

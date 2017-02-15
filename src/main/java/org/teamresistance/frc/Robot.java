@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  *
  * @author Shreya Ravi
  * @author Rothanak So
+ * @author Ellis Levine
  */
 public class Robot extends IterativeRobot {
   private final FlightStick leftJoystick = Hardware.HumanInterfaceDevices.logitechAttack3D(0);
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("Gyro Angle: ", pose.currentAngle);
     drive.onUpdate(pose);
 
+    // Full speed for shooter
     IO.ORANGE_SPINNER.setSpeed(1);
     IO.GREEN_SPINNER.setSpeed(1);
 
